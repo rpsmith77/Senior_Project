@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Job Insights{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="d-flex p-2 table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Trigram</th>
+                    <th scope="col">Count</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for trigram in trigrams.items %}
+                    <tr>
+                        <th><a href="/trigram/{{ trigram.trigram }}">{{ trigram.trigram }}</a></th>
+                        <td>{{ trigram.count }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td>
+                        {% if trigrams.has_prev %}
+                            <a href="{{ url_for('trigrams', page=trigrams.prev_num) }}">&lt;&lt; Previous
+                                Trigrams</a>{%
+                                else
+                                %}&lt;
+                            &lt; No Previous Trigrams{% endif %}
+                    </td>
+                    <td>
+                        {% if trigrams.has_next %}
+                            <a href="{{ url_for('trigrams', page=trigrams.next_num) }}">Next Trigrams &gt;&gt;</a>{%
+                                else
+                                %}No More Trigrams &gt;&gt;{% endif %}
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+{% endblock %}

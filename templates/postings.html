@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Job Insights{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="d-flex p-2 table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Job Title</th>
+                    <th scope="col">Posting</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Date Scraped</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for posting in postings.items %}
+                    <tr>
+                        <th><a href="https://www.indeed.com{{ posting.posting_id }}"
+                               target="_blank">{{ posting.job_title }}</a></th>
+                        <td>{{ posting.cleaned_job_description }}</td>
+                        <td>{{ posting.companies.company_name }}</td>
+                        <td>{{ posting.date_scraped }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td>
+                        {% if postings.has_prev %}
+                            <a href="{{ url_for('postings', page=postings.prev_num) }}">&lt;&lt; Previous
+                                Postings</a>{% else %}&lt;
+                            &lt; No Previous Postings{% endif %}
+                    </td>
+                    <td></td>
+                    <td>
+                        {% if postings.has_next %}
+                            <a href="{{ url_for('postings', page=postings.next_num) }}">Next Postings
+                                &gt;&gt;</a>{% else %}No More Postings &gt;&gt;{% endif %}
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

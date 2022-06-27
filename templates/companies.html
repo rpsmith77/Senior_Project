@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Job Insights{% endblock %}
+
+{% block body %}
+    <div class="container" style="text-align: center">
+    <div class="d-flex p-2 table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Company Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for company in companies.items %}
+                <tr>
+                    <th><a href="/company/{{ company.company_id }}">{{ company.company_name }}</a></th>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td>
+                    {% if companies.has_prev %}
+                        <a href="{{ url_for('companies', page=companies.prev_num) }}">&lt;&lt; Previous
+                            Companies</a>{% else %}&lt;
+                        &lt; No Previous Companies{% endif %} ||
+                    {% if companies.has_next %}
+                        <a href="{{ url_for('companies', page=companies.next_num) }}">Next Companies
+                            &gt;&gt;</a>{% else %}No More Companies &gt;&gt;{% endif %}
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    </div>
+
+{% endblock %}

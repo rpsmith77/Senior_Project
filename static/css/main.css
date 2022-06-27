@@ -1,0 +1,17 @@
+html {
+    font-family: 'Open Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* Navbar css */
+
+nav {
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, .2);
+}
+
+nav button:hover, nav li:hover {
+    background: #CCC;
+    border-radius: 5px;
+    transition: background-color 0.1s ease-in-out;
+}

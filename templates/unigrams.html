@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Job Insights{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="d-flex p-2 table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Unigram</th>
+                <th scope="col">Count</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for unigram in unigrams.items %}
+                <tr>
+
+                    <th><a href="/unigram/{{ unigram.unigram }}">{{ unigram.unigram }}</a></th>
+                    <td>{{ unigram.count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        <tfoot>
+                <tr>
+                    <td>
+                        {% if unigrams.has_prev %}
+                            <a href="{{ url_for('unigrams', page=unigrams.prev_num) }}">&lt;&lt; Previous
+                                Unigrams</a>{%
+                                else
+                                %}&lt;
+                            &lt; No Previous Unigrams{% endif %}
+                    </td>
+                    <td>
+                        {% if unigrams.has_next %}
+                            <a href="{{ url_for('unigrams', page=unigrams.next_num) }}">Next Unigrams &gt;&gt;</a>{%
+                                else
+                                %}No More Unigrams &gt;&gt;{% endif %}
+                    </td>
+                </tr>
+                </tfoot>
+        </table>
+    </div>
+</div>
+{% endblock %}

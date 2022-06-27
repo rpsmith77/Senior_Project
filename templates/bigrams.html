@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Job Insights{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="d-flex p-2 table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Bigram ID</th>
+                    <th scope="col">Bigram</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for bigram in bigrams.items %}
+                    <tr>
+                        <th><a href="/bigram/{{ bigram.bigram }}">{{ bigram.bigram }}</a></th>
+                        <td>{{ bigram.count }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td>
+                        {% if bigrams.has_prev %}
+                            <a href="{{ url_for('bigrams', page=bigrams.prev_num) }}">&lt;&lt; Previous
+                                Bigrams</a>{% else %}&lt;
+                            &lt; No Previous Bigrams{% endif %}
+                    </td>
+                    <td>
+                        {% if bigrams.has_next %}
+                            <a href="{{ url_for('bigrams', page=bigrams.next_num) }}">Next Bigrams
+                                &gt;&gt;</a>{% else %}No More Bigrams &gt;&gt;{% endif %}
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

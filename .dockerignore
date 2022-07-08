@@ -1,5 +1,4 @@
 .git
 .gitignore
 *.md
-/DB_Job_Insight.ipynb
-/scraper.py
+
